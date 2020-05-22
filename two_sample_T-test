@@ -1,0 +1,12 @@
+## two sample T-test
+def compare_averages_2sample(filename):
+    df = pd.read_csv(filename)
+    right_handed= df[df['handedness']== 'R']
+    left_handed = df[df['handedness']=='L']
+    result = scipy.stats.ttest_ind(right_handed['avg'],left_handed['avg'],equal_var=False,)
+    if result[1]>0.5:
+        return(True,result)
+    else:
+        return(False,result)
+filename = 'baseball_stats.csv'
+compare_averages_2sample(filename)
